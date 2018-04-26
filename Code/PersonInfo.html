@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Personal information</title>
+<script src="http://d3js.org/d3.v3.min.js"> </script>
+    <!--<script src="Script/d3.v3_5_17.js"> </script>-->
+
+    <script src="Script/CookieFunc.js"></script>
+
+<link rel="stylesheet" type="text/css" href="MyCSS.css"/>
+    <style>
+        div.honor{
+            display:block;
+            font-family: sans-serif;
+            text-align: center;
+            width: 50px;
+            margin-left: auto;
+            margin-right:auto;
+        }
+        div.honorBig{
+            font-family: Arial;
+            font-size: 30px;
+            font-weight:bold;
+            white-space: pre;
+            align-content: center;
+        }
+        div.honorBig:hover{
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        span.honorSmall{
+            position: relative;
+            margin-left: auto;
+            margin-right:auto;
+            white-space:pre;
+            font-family:Arial;
+            font-size:16px;
+            font-weight: 200;
+            color:rgb(117,117,117);
+        }
+        img.graph{
+            border: 1px dotted #000000; /*border: 1px solid #000000;*/
+            -webkit-border-radius: 50%;
+            border-radius: 50%;
+        }
+        .Rect{
+            width: 20px;
+            height: 20px;
+            margin: 1px 0 0 1px;
+            float: left;
+            display: inline-block;
+        }
+        .axis path,
+        .axis line{
+            fill: none;
+            stroke: black;
+            shape-rendering: crispEdges;
+        }
+
+        .axis text {
+            font-family: sans-serif;
+            font-size: 11px;
+        }
+
+        .MyRect {
+            fill: steelblue;
+        }
+
+        .MyText {
+            fill: white;
+            text-anchor: middle;
+            font-size: 12px;
+        }
+        .tooltip{
+            position: absolute;
+            width: 120px;
+            height: auto;
+            white-space: pre;
+            font-family: simsun;
+            font-size: 14px;
+            text-align: center;
+            border-style: solid;
+            border-width: 1px;
+            background-color: white;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<ul width="100%">
+    <li><a id="logo" class="nav">Stark  OJ</a></li>
+    <li><a href="MainPage.html" class="nav">Home</a></li>
+    <li><a href="Problems.php"class="nav">Problems</a></li>
+    <li><a href="Contest.html"class="nav">Contest</a></li>
+    <li><a href="Contact.html" class="nav">Contact</a></li>
+    <li><a href="" style="opacity:0;width:10%;cursor:default"></a></li>
+    <li><a href="" id="userMod" style="display: block;">
+        You haven't <u onclick="GoSign(1)" style="cursor: pointer" >sign in</u> or <u onclick="GoSign(2)" style="cursor: pointer">sign up</u> yet!
+    </a>
+    </li>
+    <!--<div id="userEntry" style="display: none">-->
+        <!--<span style="padding-right: 10px ; cursor: pointer;text-decoration: underline;" onclick="goHonor()" >RoyMustung</span>-->
+        <!--<img src="Image/Theo.jpg" width="60px" height="60px" onclick="goHonor()"-->
+             <!--style="float: right;position:relative;top:-20px;padding-left:20px;cursor: pointer">-->
+    <!--</div>-->
+</ul>
+<script>
+    function GoSign(num){
+        if(num == 1)
+            window.location.href = "Sign.php?c=1";
+        else window.location.href = "Sign.php?c=2";
+    }
+    function goHonor(){
+        window.location.href = "PersonInfo.html";
+    }
+    function CheckCookie() {
+//        alert(document.cookie);
+        var user = getCookie("user");
+        if(user !== ""){
+            document.getElementById("userMod").setAttribute("style","display:none");
+            document.getElementById("userEntry").setAttribute("style","display:block");
+        }
+    }
+    CheckCookie();
+</script>
+<br/>
+<br/>
+<div style="margin-top: 30px;" >
+    <table border="0px" width="90%" align="center" bgcolor="#f5f5f5" >
+        <tr style="height: 15px;"></tr>
+        <tr ><td align="center" colspan="4"><img src="Image/Theo.jpg" width="180px" height="180px" align="middle" class="graph"/></td></tr>
+        <tr><td height="10px" align="center" colspan="4"><p class="Name">Roy Mustung</p></td></tr>
+        <tr><td height="10px" align="center" colspan="4"><p class="autoGraph">Walk by faith,not by sight.</p></td></tr>
+        <tr id="draw">
+            <td height="250px" colspan="1" width="25%" id="A"></td>
+            <td height="250px" colspan="1" width="25%" id="B"></td>
+            <td height="250px" colspan="1" width="25%" id="C"></td>
+            <td height="250px" colspan="1" width="25%" id="D"></td>
+        </tr>
+        <tr height="100px"><td align="center" colspan="4">
+            <table width="100%" border="3px" class="hhh"><tr>
+                <td><div class="honor">
+                    <div class="honorBig" onclick="regenerateA(122,18,450)">122</div>
+                    <span class="honorSmall" style="left:-23px;">Solve Problems</span>
+                </div></td>
+                <td><div class="honor">
+                    <div class="honorBig" onclick="regenerateB(80,77,12,27,15);">42.6%</div>
+                    <span class="honorSmall" style="left: -13px;">Accept Rate</span>
+                </div></td>
+                <td><div class="honor">
+                    <div class="honorBig" onclick="regenerateC()">14</div>
+                    <span class="honorSmall" style="left:-15px;">Enter Contest</span>
+                </div></td>
+                <td><div class="honor">
+                    <div class="honorBig" onclick="regenerateD()">3150</div>
+                    <span class="honorSmall" style="left:-4px;">Stark Coin</span>
+                </div></td>
+            </tr></table>
+        </td></tr>
+    </table>
+</div>
+<script src="Script/Honor_Chart.js"></script>
+</body>
+</html>

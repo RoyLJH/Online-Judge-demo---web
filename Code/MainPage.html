@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stark OJ Welcome Page</title>
+    <link rel="stylesheet" type="text/css" href="MyCSS.css"/>
+    <script type="text/javascript" src="Script/CookieFunc.js" ></script>
+</head>
+<body bgcolor="#f6f6f6">
+
+
+<ul width="100%">
+    <li><a id="logo" class="nav">Stark  OJ</a></li>
+    <li><a href="MainPage.html" class="nav">Home</a></li>
+    <li><a href="Problems.php"class="nav">Problems</a></li>
+    <li><a href="Contest.html"class="nav">Contest</a></li>
+    <li><a href="Contact.html" class="nav">Contact</a></li>
+    <li><a href="" style="opacity:0;width:10%;cursor:default"></a></li>
+    <li><a href="" id="userMod" style="display: block;">
+        You haven't <u onclick="GoSign(1)" style="cursor: pointer" >sign in</u> or <u onclick="GoSign(2)" style="cursor: pointer">sign up</u> yet!
+        </a>
+    </li>
+    <div id="userEntry" style="display: none">
+        <span style="padding-right: 10px ; cursor: pointer;text-decoration: underline;" onclick="goHonor()" >RoyMustung</span>
+        <img src="Image/Theo.jpg" width="60px" height="60px" onclick="goHonor()"
+             style="float: right;position:relative;top:-20px;padding-left:20px;cursor: pointer"/>
+    </div>
+</ul>
+<script>
+    function GoSign(num){
+        if(num == 1)
+            window.location.href = "Sign.php?c=1";
+        else window.location.href = "Sign.php?c=2";
+    }
+    function goHonor(){
+        window.location.href = "PersonInfo.html";
+    }
+</script>
+
+
+<br/>
+<div  style="width:80%; background-color: #f6f6f6 ; margin-left: auto;margin-right:auto;margin-top:20px;">
+    <div class = welcome width="100%" >
+        <h2 align="center">
+            Welcome,<span id="pp">my guest</span>.
+        </h2>
+        <p>
+            Welcome to Stark OJ.
+        </p>
+        <p>
+            This is a Online Judge demo web page.You can see a design concept of an online judge.
+        </p>
+        <p>
+            More function is under design.
+        </p>
+
+    </div>
+
+    <div class="welcome" width="80%" id="sign">
+        <h2 align="center">
+            Join us!
+        </h2>
+        <p align="center">
+            Sign up an account and enjoy the pleasure of solving algorithm problems.
+        </p>
+        <table align="center" width="100%">
+            <tr align="center">
+                <td><a class="loginButton signIn" href="Sign.php?c=1" >Sign in</a></td>
+                <td><a class="loginButton signUp" href="Sign.php?c=2" >Sign up</a></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<script>
+    function deleteC(){
+        deleteCookie("user");
+    }
+//    deleteC();
+    function CheckCookie() {
+        var user = getCookie("user");
+        alert(document.cookie);
+        if(user !== ""){
+            document.getElementById("userMod").setAttribute("style","display:none");
+            document.getElementById("userEntry").setAttribute("style","display:block");
+            document.getElementById("pp").innerHTML = user;
+            document.getElementById("sign").setAttribute("style","display:none");
+        }
+    }
+    CheckCookie();
+</script>
+
+</body>
+</html>

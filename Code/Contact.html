@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact me</title>
+    <link rel="stylesheet" type="text/css" href="MyCSS.css"/>
+    <script src="Script/CookieFunc.js"></script>
+    <style>
+        .brick{
+            width: 10px;
+            height: 10px;
+            margin: 1px 0 0 1px;
+            float: left;
+            background: #eee;
+            display: inline-block;
+        }
+    </style>
+    <script src="http://d3js.org/d3.v4.min.js"></script>
+</head>
+<body bgcolor="#f6f6f6">
+<ul width="100%">
+    <li><a id="logo" class="nav">Stark  OJ</a></li>
+    <li><a href="MainPage.html" class="nav">Home</a></li>
+    <li><a href="Problems.php"class="nav">Problems</a></li>
+    <li><a href="Contest.html"class="nav">Contest</a></li>
+    <li><a href="Contact.html" class="nav">Contact</a></li>
+    <li><a href="" style="opacity:0;width:10%;cursor:default"></a></li>
+    <li><a href="" id="userMod" style="display: block;">
+        You haven't <u onclick="GoSign(1)" style="cursor: pointer" >sign in</u> or <u onclick="GoSign(2)" style="cursor: pointer">sign up</u> yet!
+    </a>
+    </li>
+    <div id="userEntry" style="display: none">
+        <span style="padding-right: 10px ; cursor: pointer;text-decoration: underline;" onclick="goHonor()" >RoyMustung</span>
+        <img src="Image/Theo.jpg" width="60px" height="60px" onclick="goHonor()"
+             style="float: right;position:relative;top:-20px;padding-left:20px;cursor: pointer"/>
+    </div>
+</ul>
+<script>
+    function GoSign(num){
+        if(num == 1)
+            window.location.href = "Sign.php?c=1";
+        else window.location.href = "Sign.php?c=2";
+    }
+    function goHonor(){
+        window.location.href = "PersonInfo.html";
+    }
+    function CheckCookie() {
+//        alert(document.cookie);
+        var user = getCookie("user");
+        if(user !== ""){
+            document.getElementById("userMod").setAttribute("style","display:none");
+            document.getElementById("userEntry").setAttribute("style","display:block");
+        }
+    }
+    CheckCookie();
+</script>
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+
+<script>
+
+    var n = 4414;
+
+    var whiteblue = d3.interpolateRgb("#eee", "#abcdef"),
+        blueorange = d3.interpolateRgb("#abcdef", "#ffcc99"),
+        orangewhite = d3.interpolateRgb("#ffcc99", "#eee");
+
+    d3.select("body").selectAll(".brick")
+        .data(d3.range(414))
+        .enter().append("div")
+        .attr("class","brick")
+        .style("opacity",0);
+
+
+    d3.select("body").selectAll(".brick")
+        .data(d3.range(n))
+        .enter().append("div")
+        .attr("class","brick")
+        .transition()
+        .delay(function(d, i) { return i + Math.random() * n / 4; })
+        .ease(d3.easeLinear)
+        .on("start", function re() {
+            d3.active(this)
+                .styleTween("background-color", function() { return whiteblue; })
+                .transition()
+                .delay(1000)
+                .styleTween("background-color", function() { return blueorange; })
+                .transition()
+                .delay(1000)
+                .styleTween("background-color", function() { return orangewhite; })
+                .transition()
+                .delay(n)
+                .on("start", re);
+        });
+
+</script>
+
+
+
+<br/>
+<div class = welcome width="100%" align="center" style="margin-top: 400px;">
+    <p>
+        Author:Lu Jiahao
+    </p>
+    <p>
+        From Digital Media Technology 2015,Software College,SDU
+    </p>
+    <p>
+        Contact me: createntljh@126.com or qq:1025059662
+    </p>
+
+</div>
+</body>
+</html>
